@@ -9,4 +9,8 @@ use Illuminate\Database\Eloquent\Model;
 class Account extends Model
 {
     use HasFactory, HasUuids;
+
+    public function transactions() {
+        return $this->hasMany(Transaction::class);
+    }
 }
