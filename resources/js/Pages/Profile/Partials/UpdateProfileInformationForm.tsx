@@ -1,11 +1,8 @@
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
 import { Link, useForm, usePage } from '@inertiajs/react';
 import { Transition } from '@headlessui/react';
 import { FormEventHandler } from 'react';
 import { PageProps } from '@/types';
+import { Input, Button } from '@nextui-org/react';
 
 export default function UpdateProfileInformation({ mustVerifyEmail, status, className = '' }: { mustVerifyEmail: boolean, status?: string, className?: string }) {
     const user = usePage<PageProps>().props.auth.user;
@@ -33,25 +30,21 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
 
             <form onSubmit={submit} className="mt-6 space-y-6">
                 <div>
-                    <InputLabel htmlFor="name" value="Name" />
-
-                    <TextInput
+                    <Input
                         id="name"
                         className="mt-1 block w-full"
                         value={data.name}
                         onChange={(e) => setData('name', e.target.value)}
                         required
-                        isFocused
                         autoComplete="name"
+                        label="Name"
+                        isInvalid={!!errors.name}
+                        errorMessage={errors.name}
                     />
-
-                    <InputError className="mt-2" message={errors.name} />
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="email" value="Email" />
-
-                    <TextInput
+                    <Input
                         id="email"
                         type="email"
                         className="mt-1 block w-full"
@@ -59,9 +52,10 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                         onChange={(e) => setData('email', e.target.value)}
                         required
                         autoComplete="username"
+                        label="Email"
+                        isInvalid={!!errors.email}
+                        errorMessage={errors.email}
                     />
-
-                    <InputError className="mt-2" message={errors.email} />
                 </div>
 
                 {mustVerifyEmail && user.email_verified_at === null && (
@@ -87,7 +81,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                 )}
 
                 <div className="flex items-center gap-4">
-                    <PrimaryButton disabled={processing}>Save</PrimaryButton>
+                    <Button type='submit' color="primary" disabled={processing}>Save</Button>
 
                     <Transition
                         show={recentlySuccessful}

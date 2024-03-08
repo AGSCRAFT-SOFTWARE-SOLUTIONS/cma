@@ -1,10 +1,7 @@
 import { useRef, FormEventHandler } from 'react';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
 import { useForm } from '@inertiajs/react';
 import { Transition } from '@headlessui/react';
+import { Button, Input } from '@nextui-org/react';
 
 export default function UpdatePasswordForm({ className = '' }: { className?: string }) {
     const passwordInput = useRef<HTMLInputElement>(null);
@@ -48,9 +45,7 @@ export default function UpdatePasswordForm({ className = '' }: { className?: str
 
             <form onSubmit={updatePassword} className="mt-6 space-y-6">
                 <div>
-                    <InputLabel htmlFor="current_password" value="Current Password" />
-
-                    <TextInput
+                    <Input
                         id="current_password"
                         ref={currentPasswordInput}
                         value={data.current_password}
@@ -58,15 +53,14 @@ export default function UpdatePasswordForm({ className = '' }: { className?: str
                         type="password"
                         className="mt-1 block w-full"
                         autoComplete="current-password"
+                        label="Current Password"
+                        isInvalid={!!errors.current_password}
+                        errorMessage={!!errors.current_password}
                     />
-
-                    <InputError message={errors.current_password} className="mt-2" />
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="password" value="New Password" />
-
-                    <TextInput
+                    <Input
                         id="password"
                         ref={passwordInput}
                         value={data.password}
@@ -74,28 +68,28 @@ export default function UpdatePasswordForm({ className = '' }: { className?: str
                         type="password"
                         className="mt-1 block w-full"
                         autoComplete="new-password"
+                        label="New Password"
+                        isInvalid={!!errors.password}
+                        errorMessage={!!errors.password}
                     />
-
-                    <InputError message={errors.password} className="mt-2" />
                 </div>
 
                 <div>
-                    <InputLabel htmlFor="password_confirmation" value="Confirm Password" />
-
-                    <TextInput
+                    <Input
                         id="password_confirmation"
                         value={data.password_confirmation}
                         onChange={(e) => setData('password_confirmation', e.target.value)}
                         type="password"
                         className="mt-1 block w-full"
                         autoComplete="new-password"
+                        label="Confirm Password"
+                        isInvalid={!!errors.password_confirmation}
+                        errorMessage={!!errors.password_confirmation}
                     />
-
-                    <InputError message={errors.password_confirmation} className="mt-2" />
                 </div>
 
                 <div className="flex items-center gap-4">
-                    <PrimaryButton disabled={processing}>Save</PrimaryButton>
+                    <Button type='submit' color="primary" disabled={processing}>Save</Button>
 
                     <Transition
                         show={recentlySuccessful}
