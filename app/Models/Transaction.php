@@ -9,4 +9,19 @@ use Illuminate\Database\Eloquent\Model;
 class Transaction extends Model
 {
     use HasFactory, HasUuids;
+
+    public function account()
+    {
+        return $this->belongsTo(Account::class);
+    }
+
+    public function expense()
+    {
+        return $this->hasOne(Expense::class);
+    }
+
+    public function clientPayment()
+    {
+        return $this->hasOne(ClientPayment::class);
+    }
 }
