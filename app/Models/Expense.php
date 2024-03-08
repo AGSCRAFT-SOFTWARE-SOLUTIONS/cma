@@ -9,4 +9,24 @@ use Illuminate\Database\Eloquent\Model;
 class Expense extends Model
 {
     use HasFactory, HasUuids;
+
+    public function transaction()
+    {
+        return $this->belongsTo(Transaction::class);
+    }
+
+    public function project()
+    {
+        return $this->belongsTo(Project::class);
+    }
+
+    public function subContract()
+    {
+        return $this->belongsTo(SubContract::class);
+    }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }
