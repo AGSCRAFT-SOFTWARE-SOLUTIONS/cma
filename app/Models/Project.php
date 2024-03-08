@@ -9,4 +9,24 @@ use Illuminate\Database\Eloquent\Model;
 class Project extends Model
 {
     use HasFactory, HasUuids;
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
+
+    public function subContracts()
+    {
+        return $this->hasMany(SubContract::class);
+    }
+
+    public function expenses()
+    {
+        return $this->hasMany(Expense::class);
+    }
+
+    public function clientPayments()
+    {
+        return $this->hasMany(ClientPayment::class);
+    }
 }
