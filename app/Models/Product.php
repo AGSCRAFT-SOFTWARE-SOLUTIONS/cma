@@ -9,4 +9,9 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     use HasFactory, HasUuids;
+
+    public function expense()
+    {
+        return $this->belongsTo(Expense::class);
+    }
 }
