@@ -9,4 +9,9 @@ use Illuminate\Database\Eloquent\Model;
 class Contractor extends Model
 {
     use HasFactory, HasUuids;
+
+    public function subContracts()
+    {
+        return $this->hasMany(SubContract::class);
+    }
 }
