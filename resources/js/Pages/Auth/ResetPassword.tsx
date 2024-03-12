@@ -1,5 +1,4 @@
 import { useEffect, FormEventHandler } from 'react';
-import GuestLayout from '@/Layouts/GuestLayout';
 import { Head, useForm } from '@inertiajs/react';
 import { Button, Input } from '@nextui-org/react';
 
@@ -24,7 +23,7 @@ export default function ResetPassword({ token, email }: { token: string, email: 
     };
 
     return (
-        <GuestLayout>
+        <>
             <Head title="Reset Password" />
 
             <form onSubmit={submit}>
@@ -78,6 +77,6 @@ export default function ResetPassword({ token, email }: { token: string, email: 
                     </Button>
                 </div>
             </form>
-        </GuestLayout>
+        </>
     );
 }

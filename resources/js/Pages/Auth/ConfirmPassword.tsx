@@ -1,5 +1,4 @@
 import { useEffect, FormEventHandler } from 'react';
-import GuestLayout from '@/Layouts/GuestLayout';
 import { Head, useForm } from '@inertiajs/react';
 import { Button, Input } from '@nextui-org/react';
 
@@ -21,7 +20,7 @@ export default function ConfirmPassword() {
     };
 
     return (
-        <GuestLayout>
+        <>
             <Head title="Confirm Password" />
 
             <div className="mb-4 text-sm text-gray-600 dark:text-gray-400">
@@ -49,6 +48,6 @@ export default function ConfirmPassword() {
                     </Button>
                 </div>
             </form>
-        </GuestLayout>
+        </>
     );
 }

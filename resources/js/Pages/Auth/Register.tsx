@@ -1,5 +1,4 @@
 import { useEffect, FormEventHandler } from 'react';
-import GuestLayout from '@/Layouts/GuestLayout';
 import { Head, Link, useForm } from '@inertiajs/react';
 import { Input, Button } from '@nextui-org/react';
 
@@ -24,7 +23,7 @@ export default function Register() {
     };
 
     return (
-        <GuestLayout>
+        <>
             <Head title="Register" />
 
             <form onSubmit={submit} className='w-unit-7xl'>
@@ -104,6 +103,6 @@ export default function Register() {
                     </Button>
                 </div>
             </form>
-        </GuestLayout>
+        </>
     );
 }

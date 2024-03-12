@@ -1,4 +1,3 @@
-import GuestLayout from '@/Layouts/GuestLayout';
 import { Head, useForm } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
 import { Button, Input } from '@nextui-org/react';
@@ -15,7 +14,7 @@ export default function ForgotPassword({ status }: { status?: string }) {
     };
 
     return (
-        <GuestLayout>
+        <>
             <Head title="Forgot Password" />
 
             <div className="mb-4 text-sm text-gray-600 dark:text-gray-400">
@@ -43,6 +42,6 @@ export default function ForgotPassword({ status }: { status?: string }) {
                     </Button>
                 </div>
             </form>
-        </GuestLayout>
+        </>
     );
 }
