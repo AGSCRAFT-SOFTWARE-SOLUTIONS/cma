@@ -25,6 +25,8 @@
     },
     "dependencies": {
         "@nextui-org/react": "^2.2.10",
-        "framer-motion": "^11.0.8"
+        "framer-motion": "^11.0.8",
+        "react-icons": "^5.0.1",
+        "react-pro-sidebar": "^1.1.0"
     }
 }
