@@ -10,6 +10,11 @@ class Contractor extends Model
 {
     use HasFactory, HasUuids;
 
+    protected $fillable = [
+        "name",
+        "phone",
+    ];
+
     public function subContracts()
     {
         return $this->hasMany(SubContract::class);

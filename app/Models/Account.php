@@ -10,7 +10,14 @@ class Account extends Model
 {
     use HasFactory, HasUuids;
 
-    public function transactions() {
+    protected $fillable = [
+        "name",
+        "balance",
+        "type"
+    ];
+
+    public function transactions()
+    {
         return $this->hasMany(Transaction::class);
     }
 }

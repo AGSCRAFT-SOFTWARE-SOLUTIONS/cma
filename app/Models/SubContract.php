@@ -10,7 +10,15 @@ class SubContract extends Model
 {
     use HasFactory, HasUuids;
 
-        public function contractor()
+    protected $fillable = [
+        "contractor_id",
+        "project_id",
+        "work",
+        "start_date",
+        "completion_date",
+    ];
+
+    public function contractor()
     {
         return $this->belongsTo(Contractor::class);
     }

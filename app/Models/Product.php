@@ -10,6 +10,13 @@ class Product extends Model
 {
     use HasFactory, HasUuids;
 
+    protected $fillable = [
+        "name",
+        "cost",
+        "type",
+        "expense_id",
+    ];
+
     public function expense()
     {
         return $this->belongsTo(Expense::class);

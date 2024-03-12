@@ -10,6 +10,12 @@ class Expense extends Model
 {
     use HasFactory, HasUuids;
 
+    protected $fillable = [
+        "transaction_id",
+        "project_id",
+        "sub_contract_id",
+    ];
+
     public function transaction()
     {
         return $this->belongsTo(Transaction::class);

@@ -10,7 +10,13 @@ class ClientPayment extends Model
 {
     use HasFactory, HasUuids;
 
-        public function client()
+    protected $fillable = [
+        "client_id",
+        "project_id",
+        "transaction_id",
+    ];
+
+    public function client()
     {
         return $this->belongsTo(Client::class);
     }

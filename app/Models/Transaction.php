@@ -10,6 +10,15 @@ class Transaction extends Model
 {
     use HasFactory, HasUuids;
 
+    protected $fillable = [
+        "account_id",
+        "amount",
+        "pre_balance",
+        "post_balance",
+        "payment_method",
+        "note",
+    ];
+
     public function account()
     {
         return $this->belongsTo(Account::class);
