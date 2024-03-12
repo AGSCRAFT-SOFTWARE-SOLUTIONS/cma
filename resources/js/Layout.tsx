@@ -20,6 +20,6 @@ export default ({ children }: PropsWithChildren) => {
                 </SubMenu>
             </Menu>
         </Sidebar>
-        {children}
+        <main className="p-4">{children}</main>
     </section>
 }
