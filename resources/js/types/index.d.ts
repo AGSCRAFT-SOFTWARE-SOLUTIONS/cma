@@ -12,12 +12,14 @@ export type PageProps<T extends Record<string, unknown> = Record<string, unknown
 };
 
 export type Account = {
+    id: string,
     name: string,
     balance: number,
     type: "bank" | "advance"
 }
 
 export type Transaction = {
+    id: string,
     account_id: string,
     amount: number,
     pre_balance: number,
@@ -27,12 +29,14 @@ export type Transaction = {
 }
 
 export type Client = {
+    id: string,
     name: string,
     phone: string,
     address: string,
 }
 
 export type Project = {
+    id: string,
     name: string,
     location: string,
     category: string,
@@ -44,17 +48,20 @@ export type Project = {
 }
 
 export type ClientPayment = {
+    id: string,
     client_id: string,
     project_id: string,
     transaction_id: string,
 }
 
 export type Contractor = {
+    id: string,
     name: string,
     phone: string,
 }
 
 export type SubContract = {
+    id: string,
     contractor_id: string,
     project_id: string,
     work: string,
@@ -63,12 +70,14 @@ export type SubContract = {
 }
 
 export type Expense = {
+    id: string,
     transaction_id: string,
     project_id: string,
     sub_contract_id: string,
 }
 
 export type Product = {
+    id: string,
     name: string,
     cost: number,
     type: "business" | "others",
