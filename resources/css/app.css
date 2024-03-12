@@ -8,3 +8,7 @@
     box-shadow: none !important;
     border: 0 !important;
 }
+
+[data-slot="inner-wrapper"]:has(input){
+    margin-top: 1rem;
+}
