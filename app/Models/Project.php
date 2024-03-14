@@ -10,16 +10,15 @@ class Project extends Model
 {
     use HasFactory, HasUuids;
 
-
     protected $fillable = [
-        "name",
-        "location",
-        "category",
-        "client_id",
-        "budget",
-        "start_date",
-        "completion_date",
-        "description",
+        'name',
+        'location',
+        'category',
+        'client_id',
+        'budget',
+        'start_date',
+        'completion_date',
+        'description',
     ];
 
     public function client()
