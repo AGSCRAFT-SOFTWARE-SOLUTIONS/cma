@@ -3,7 +3,8 @@ import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDi
 import { Account } from "@/types";
 import CreateUpdateAccount from "./CreateUpdateAccount";
 import DeleteAccount from "./DeleteAccount"
-import { FaFilePen, FaTrash } from "react-icons/fa6";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 export default function App({ children, account }: PropsWithChildren<{ account: Account }>) {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
@@ -36,10 +37,10 @@ export default function App({ children, account }: PropsWithChildren<{ account: 
                             <ModalFooter>
                                 <Button variant="flat" onClick={onClose}>Close</Button>
                                 <CreateUpdateAccount type="edit" account={account}>
-                                    <Button className="min-w-min" color="secondary" variant="shadow"><FaFilePen /> Edit</Button>
+                                    <Button className="min-w-min" color="secondary" variant="shadow"><FontAwesomeIcon icon={faPen} /> Edit</Button>
                                 </CreateUpdateAccount>
                                 <DeleteAccount account={account}>
-                                    <Button className="min-w-min" color="danger" variant="shadow"><FaTrash /> Delete</Button>
+                                    <Button className="min-w-min" color="danger" variant="shadow"><FontAwesomeIcon icon={faTrash} /> Delete</Button>
                                 </DeleteAccount>
                             </ModalFooter>
                         </>

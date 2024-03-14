@@ -1,10 +1,10 @@
 import { Link, usePage } from "@inertiajs/react"
 import { PropsWithChildren, useState } from "react"
-import { GiHamburgerMenu } from "react-icons/gi"
 import { Menu, MenuItem, Sidebar, SubMenu } from "react-pro-sidebar"
 import CreateUpdateAccount from "./Pages/Accounts/CreateUpdateAccount"
 import { User } from "./types"
-import { FaBriefcase, FaCirclePlus, FaPiggyBank, FaWallet } from "react-icons/fa6"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faBank, faBars, faBriefcase, faCirclePlus, faWallet } from "@fortawesome/free-solid-svg-icons"
 
 export default ({ children }: PropsWithChildren) => {
     const auth = usePage().props.auth as { user: User | null };
@@ -13,16 +13,16 @@ export default ({ children }: PropsWithChildren) => {
 
     return <section className="flex">
         {auth.user && <Sidebar collapsed={!isSideBarOpen} className="h-screen">
-            <Menu><MenuItem icon={<GiHamburgerMenu />} onClick={() => setIsSideBarOpen(prev => !prev)}>AGKScraft</MenuItem></Menu>
+            <Menu><MenuItem icon={<FontAwesomeIcon icon={faBars} />} onClick={() => setIsSideBarOpen(prev => !prev)}>AGKScraft</MenuItem></Menu>
             <Menu closeOnClick>
-                <SubMenu label="Accouts" icon={<FaWallet />} onOpenChange={() => setIsSideBarOpen(true)}>
+                <SubMenu label="Accouts" icon={<FontAwesomeIcon icon={faBank} />} onOpenChange={() => setIsSideBarOpen(true)}>
                     <CreateUpdateAccount type="create">
-                        <MenuItem icon={<FaCirclePlus />}>Add account</MenuItem>
+                        <MenuItem icon={<FontAwesomeIcon icon={faCirclePlus} />}>Add account</MenuItem>
                     </CreateUpdateAccount>
-                    <MenuItem icon={<FaPiggyBank />} component={<Link href={route("accounts.index")} />}>Show all accounts</MenuItem>
+                    <MenuItem icon={<FontAwesomeIcon icon={faWallet} />} component={<Link href={route("accounts.index")} />}>Show all accounts</MenuItem>
                 </SubMenu>
-                <SubMenu label="Projects" icon={<FaBriefcase />} onOpenChange={() => setIsSideBarOpen(true)}>
-                    <MenuItem component={<Link href="#" />} icon={<FaCirclePlus />}> Add project </MenuItem>
+                <SubMenu label="Projects" icon={<FontAwesomeIcon icon={faBriefcase} />} onOpenChange={() => setIsSideBarOpen(true)}>
+                    <MenuItem component={<Link href="#" />} icon={<FontAwesomeIcon icon={faCirclePlus} />}> Add project </MenuItem>
                 </SubMenu>
             </Menu>
         </Sidebar>}
