@@ -11,12 +11,12 @@ class Client extends Model
     use HasFactory, HasUuids;
 
     protected $fillable = [
-        "name",
-        "phone",
-        "address",
+        'name',
+        'phone',
+        'address',
     ];
 
-    public function payments()
+    public function client_payments()
     {
         return $this->hasMany(ClientPayment::class);
     }
