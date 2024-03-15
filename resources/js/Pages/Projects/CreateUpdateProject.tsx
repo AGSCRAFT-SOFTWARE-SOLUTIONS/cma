@@ -1,4 +1,4 @@
-import { Project } from "@/types";
+import { Client, Project } from "@/types";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useForm } from "@inertiajs/react";
@@ -16,14 +16,18 @@ import {
     Textarea,
 } from "@nextui-org/react";
 import { PropsWithChildren, cloneElement } from "react";
-import CreateUpdateClient from "../Client/CreateUpdateClient";
+import CreateUpdateClient from "../Clients/CreateUpdateClient";
 
 export default ({
     children,
     type,
     project,
+    clients,
 }: PropsWithChildren<
-    { type: "create"; project?: never } | { type: "edit"; project: Project }
+    { clients: Client[] } & (
+        | { type: "create"; project?: never }
+        | { type: "edit"; project: Project }
+    )
 >) => {
     const { data, setData, errors, post, put } = useForm<Project>({
         id: project?.id ?? "",
@@ -89,9 +93,14 @@ export default ({
                                     setData("client_id", e.toString())
                                 }
                             >
-                                <AutocompleteItem key={"asdf"} value={"Asdf"}>
-                                    Asdf
-                                </AutocompleteItem>
+                                {clients.map((client) => (
+                                    <AutocompleteItem
+                                        key={client.id}
+                                        value={client.id}
+                                    >
+                                        {client.name}
+                                    </AutocompleteItem>
+                                ))}
                             </Autocomplete>
                             <CreateUpdateClient type="create">
                                 <Button

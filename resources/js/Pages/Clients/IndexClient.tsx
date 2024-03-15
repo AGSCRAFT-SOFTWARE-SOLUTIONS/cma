@@ -1,4 +1,4 @@
-import { Project, PageProps, Client } from "@/types";
+import { Client, PageProps } from "@/types";
 import {
     Button,
     Table,
@@ -8,10 +8,10 @@ import {
     TableHeader,
     TableRow,
 } from "@nextui-org/react";
-import CreateUpdateProject from "./CreateUpdateProject";
-import DeleteProject from "./DeleteProject";
-import ReadProject from "./ReadProject";
-import { Head, usePage } from "@inertiajs/react";
+import CreateUpdateClient from "./CreateUpdateClient";
+import DeleteClient from "./DeleteClient";
+import ReadClient from "./ReadClient";
+import { Head } from "@inertiajs/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faCirclePlus,
@@ -20,47 +20,35 @@ import {
     faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 
-export default ({
-    projects,
-}: PageProps<{
-    projects: (Project & { client: Client })[];
-}>) => {
-    const clients = usePage<PageProps>().props.clients;
-
+export default ({ clients }: PageProps<{ clients: Client[] }>) => {
     return (
         <section className="grid gap-4">
-            <Head title="Projects" />
+            <Head title="Clients" />
             <div className="flex items-center justify-between">
-                <h1 className="font-bold text-2xl">Projects</h1>
-                <CreateUpdateProject type="create" clients={clients}>
+                <h1 className="font-bold text-2xl">Clients</h1>
+                <CreateUpdateClient type="create">
                     <Button color="primary" variant="shadow">
                         <FontAwesomeIcon icon={faCirclePlus} /> Add one
                     </Button>
-                </CreateUpdateProject>
+                </CreateUpdateClient>
             </div>
             <Table>
                 <TableHeader>
                     <TableColumn>SNo</TableColumn>
                     <TableColumn>Name</TableColumn>
-                    <TableColumn>Client</TableColumn>
-                    <TableColumn>Category</TableColumn>
-                    <TableColumn>Location</TableColumn>
-                    <TableColumn>Start date</TableColumn>
-                    <TableColumn>Budget</TableColumn>
+                    <TableColumn>Phone</TableColumn>
+                    <TableColumn>Address</TableColumn>
                     <TableColumn>Actions</TableColumn>
                 </TableHeader>
                 <TableBody>
-                    {projects.map((project, index) => (
+                    {clients.map((client, index) => (
                         <TableRow key={index}>
                             <TableCell>{index + 1}</TableCell>
-                            <TableCell>{project.name}</TableCell>
-                            <TableCell>{project.client.name}</TableCell>
-                            <TableCell>{project.category}</TableCell>
-                            <TableCell>{project.location}</TableCell>
-                            <TableCell>{project.start_date}</TableCell>
-                            <TableCell>{project.budget}</TableCell>
+                            <TableCell>{client.name}</TableCell>
+                            <TableCell>{client.phone}</TableCell>
+                            <TableCell>{client.address}</TableCell>
                             <TableCell className="flex gap-2">
-                                <ReadProject project={project}>
+                                <ReadClient client={client}>
                                     <Button
                                         className="min-w-min"
                                         color="primary"
@@ -68,12 +56,8 @@ export default ({
                                     >
                                         <FontAwesomeIcon icon={faEye} />
                                     </Button>
-                                </ReadProject>
-                                <CreateUpdateProject
-                                    type="edit"
-                                    project={project}
-                                    clients={clients}
-                                >
+                                </ReadClient>
+                                <CreateUpdateClient type="edit" client={client}>
                                     <Button
                                         className="min-w-min"
                                         color="secondary"
@@ -81,8 +65,8 @@ export default ({
                                     >
                                         <FontAwesomeIcon icon={faPen} />
                                     </Button>
-                                </CreateUpdateProject>
-                                <DeleteProject project={project}>
+                                </CreateUpdateClient>
+                                <DeleteClient client={client}>
                                     <Button
                                         className="min-w-min"
                                         color="danger"
@@ -90,7 +74,7 @@ export default ({
                                     >
                                         <FontAwesomeIcon icon={faTrash} />
                                     </Button>
-                                </DeleteProject>
+                                </DeleteClient>
                             </TableCell>
                         </TableRow>
                     ))}

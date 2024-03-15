@@ -9,17 +9,19 @@ import {
     useDisclosure,
     Input,
 } from "@nextui-org/react";
-import { Client, Project } from "@/types";
+import { Client, PageProps, Project } from "@/types";
 import CreateUpdateProject from "./CreateUpdateProject";
 import DeleteProject from "./DeleteProject";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPen, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { usePage } from "@inertiajs/react";
 
 export default function App({
     children,
     project,
 }: PropsWithChildren<{ project: Project & { client: Client } }>) {
     const { isOpen, onOpen, onOpenChange } = useDisclosure();
+    const clients = usePage<PageProps>().props.clients;
 
     return (
         <>
@@ -69,6 +71,7 @@ export default function App({
                                 <CreateUpdateProject
                                     type="edit"
                                     project={project}
+                                    clients={clients}
                                 >
                                     <Button
                                         className="min-w-min"

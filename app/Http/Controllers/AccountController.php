@@ -28,11 +28,15 @@ class AccountController extends Controller
      */
     public function store(Request $request)
     {
-        Account::create($request->validate([
-            "name" => "required",
-            "balance" => "required|integer",
-            "type" => "required|in:bank,advance",
-        ]));
+        Account::create(
+            $request->validate(
+                [
+                "name" => "required",
+                "balance" => "required|integer",
+                "type" => "required|in:bank,advance",
+                ]
+            )
+        );
     }
 
     /**
@@ -56,11 +60,15 @@ class AccountController extends Controller
      */
     public function update(Account $account, Request $request)
     {
-        $account->update($request->validate([
-            "name" => "required",
-            "balance" => "required|integer",
-            "type" => "required|in:bank,advance",
-        ]));
+        $account->update(
+            $request->validate(
+                [
+                "name" => "required",
+                "balance" => "required|integer",
+                "type" => "required|in:bank,advance",
+                ]
+            )
+        );
     }
 
     /**

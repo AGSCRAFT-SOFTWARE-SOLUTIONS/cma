@@ -2,7 +2,6 @@ import { Link, usePage } from "@inertiajs/react";
 import { PropsWithChildren, useState } from "react";
 import { Menu, MenuItem, Sidebar, SubMenu } from "react-pro-sidebar";
 import CreateUpdateAccount from "./Pages/Accounts/CreateUpdateAccount";
-import { User } from "./types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faBank,
@@ -15,15 +14,15 @@ import {
     faWallet,
 } from "@fortawesome/free-solid-svg-icons";
 import CreateUpdateProject from "./Pages/Projects/CreateUpdateProject";
-import CreateUpdateClient from "./Pages/Client/CreateUpdateClient";
+import CreateUpdateClient from "./Pages/Clients/CreateUpdateClient";
 
 export default ({ children }: PropsWithChildren) => {
-    const auth = usePage().props.auth as { user: User | null };
+    const props = usePage().props as any;
     const [isSideBarOpen, setIsSideBarOpen] = useState(true);
 
     return (
         <section className="flex">
-            {auth.user && (
+            {props.auth.user && (
                 <Sidebar collapsed={!isSideBarOpen} className="h-screen">
                     <Menu>
                         <MenuItem
@@ -54,7 +53,7 @@ export default ({ children }: PropsWithChildren) => {
                                     <Link href={route("accounts.index")} />
                                 }
                             >
-                                Show all accounts
+                                Show all clients
                             </MenuItem>
                         </SubMenu>
                         <SubMenu
@@ -62,7 +61,10 @@ export default ({ children }: PropsWithChildren) => {
                             icon={<FontAwesomeIcon icon={faBriefcase} />}
                             onOpenChange={() => setIsSideBarOpen(true)}
                         >
-                            <CreateUpdateProject type="create">
+                            <CreateUpdateProject
+                                type="create"
+                                clients={props.clients}
+                            >
                                 <MenuItem
                                     component={<Link href="#" />}
                                     icon={
@@ -99,7 +101,7 @@ export default ({ children }: PropsWithChildren) => {
                             <MenuItem
                                 icon={<FontAwesomeIcon icon={faUserGroup} />}
                                 component={
-                                    <Link href={route("accounts.index")} />
+                                    <Link href={route("clients.index")} />
                                 }
                             >
                                 Show all accounts
@@ -110,7 +112,7 @@ export default ({ children }: PropsWithChildren) => {
             )}
             <main
                 className={
-                    auth.user
+                    props.auth.user
                         ? "p-4 flex-grow"
                         : "h-screen grid place-content-center w-full"
                 }

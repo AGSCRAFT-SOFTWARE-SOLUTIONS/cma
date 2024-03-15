@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
 use App\Models\Project;
 use Illuminate\Http\Request;
 
@@ -32,11 +33,11 @@ class ProjectController extends Controller
             'name' => 'required',
             'location' => 'required',
             'category' => 'required',
-            'client_id' => 'required|exists:users,id',
+            'client_id' => 'required|exists:clients,id',
             'budget' => 'required|numeric|min:1',
             'start_date' => 'required|date',
             'completion_date' => 'required|date|after:start_date',
-            'description' => 'required',
+            'description' => 'nullable',
         ]));
     }
 
@@ -65,11 +66,11 @@ class ProjectController extends Controller
             'name' => 'required',
             'location' => 'required',
             'category' => 'required',
-            'client_id' => 'required|exists:users,id',
+            'client_id' => 'required|exists:clients,id',
             'budget' => 'required|numeric|min:1',
             'start_date' => 'required|date',
             'completion_date' => 'required|date|after:start_date',
-            'description' => 'required',
+            'description' => 'nullable',
         ]));
     }
 
