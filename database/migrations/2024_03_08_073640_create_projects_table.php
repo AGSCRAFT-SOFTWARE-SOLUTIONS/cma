@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->integer('budget');
             $table->date('start_date');
             $table->date('completion_date');
-            $table->longText('description');
+            $table->longText('description')->nullable();
             $table->timestamps();
         });
     }
