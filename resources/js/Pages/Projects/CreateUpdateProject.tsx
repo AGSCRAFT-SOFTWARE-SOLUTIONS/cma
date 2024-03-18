@@ -90,6 +90,7 @@ export default ({
                                 onSelectionChange={(e) =>
                                     setData("client_id", e.toString())
                                 }
+                                defaultSelectedKey={project?.client_id ?? ""}
                             >
                                 {clients.map((client) => (
                                     <AutocompleteItem
