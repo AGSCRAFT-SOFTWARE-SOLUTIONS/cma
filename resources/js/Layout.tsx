@@ -61,10 +61,7 @@ export default ({ children }: PropsWithChildren) => {
                             icon={<FontAwesomeIcon icon={faBriefcase} />}
                             onOpenChange={() => setIsSideBarOpen(true)}
                         >
-                            <CreateUpdateProject
-                                type="create"
-                                clients={props.clients}
-                            >
+                            <CreateUpdateProject type="create">
                                 <MenuItem
                                     component={<Link href="#" />}
                                     icon={

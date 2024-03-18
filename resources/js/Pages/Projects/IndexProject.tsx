@@ -11,7 +11,7 @@ import {
 import CreateUpdateProject from "./CreateUpdateProject";
 import DeleteProject from "./DeleteProject";
 import ReadProject from "./ReadProject";
-import { Head, usePage } from "@inertiajs/react";
+import { Head, Link, usePage } from "@inertiajs/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faCirclePlus,
@@ -32,7 +32,7 @@ export default ({
             <Head title="Projects" />
             <div className="flex items-center justify-between">
                 <h1 className="font-bold text-2xl">Projects</h1>
-                <CreateUpdateProject type="create" clients={clients}>
+                <CreateUpdateProject type="create">
                     <Button color="primary" variant="shadow">
                         <FontAwesomeIcon icon={faCirclePlus} /> Add one
                     </Button>
@@ -60,19 +60,18 @@ export default ({
                             <TableCell>{project.start_date}</TableCell>
                             <TableCell>{project.budget}</TableCell>
                             <TableCell className="flex gap-2">
-                                <ReadProject project={project}>
-                                    <Button
-                                        className="min-w-min"
-                                        color="primary"
-                                        variant="flat"
-                                    >
-                                        <FontAwesomeIcon icon={faEye} />
-                                    </Button>
-                                </ReadProject>
+                                <Button
+                                    className="min-w-min"
+                                    color="primary"
+                                    variant="flat"
+                                    as={Link}
+                                    href={route("projects.show", project.id)}
+                                >
+                                    <FontAwesomeIcon icon={faEye} />
+                                </Button>
                                 <CreateUpdateProject
                                     type="edit"
                                     project={project}
-                                    clients={clients}
                                 >
                                     <Button
                                         className="min-w-min"

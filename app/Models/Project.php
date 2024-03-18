@@ -26,7 +26,7 @@ class Project extends Model
         return $this->belongsTo(Client::class);
     }
 
-    public function subContracts()
+    public function sub_contracts()
     {
         return $this->hasMany(SubContract::class);
     }
@@ -36,7 +36,7 @@ class Project extends Model
         return $this->hasMany(Expense::class);
     }
 
-    public function clientPayments()
+    public function client_payments()
     {
         return $this->hasMany(ClientPayment::class);
     }

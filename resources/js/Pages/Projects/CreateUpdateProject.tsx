@@ -1,7 +1,7 @@
-import { Client, Project } from "@/types";
+import { Client, PageProps, Project } from "@/types";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useForm } from "@inertiajs/react";
+import { useForm, usePage } from "@inertiajs/react";
 import {
     Modal,
     ModalContent,
@@ -22,12 +22,8 @@ export default ({
     children,
     type,
     project,
-    clients,
 }: PropsWithChildren<
-    { clients: Client[] } & (
-        | { type: "create"; project?: never }
-        | { type: "edit"; project: Project }
-    )
+    { type: "create"; project?: never } | { type: "edit"; project: Project }
 >) => {
     const { data, setData, errors, post, put } = useForm<Project>({
         id: project?.id ?? "",
@@ -40,6 +36,8 @@ export default ({
         description: project?.description ?? "",
         completion_date: project?.completion_date ?? "",
     });
+
+    const clients = usePage<PageProps>().props.clients;
 
     const { isOpen, onOpen, onOpenChange, onClose } = useDisclosure();
 

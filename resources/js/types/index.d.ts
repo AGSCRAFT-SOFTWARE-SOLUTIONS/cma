@@ -29,6 +29,8 @@ export type Transaction = {
     post_balance: number;
     payment_method: string;
     note: string;
+    created_at: string;
+    updated_at: string;
 };
 
 export type Client = {
@@ -76,7 +78,7 @@ export type Expense = {
     id: string;
     transaction_id: string;
     project_id: string;
-    sub_contract_id: string;
+    sub_contract_id: string | null;
 };
 
 export type Product = {
@@ -85,4 +87,22 @@ export type Product = {
     cost: number;
     type: "business" | "others";
     expense_id: string;
+};
+
+export type TransactionAugment = Transaction & { account: Account };
+export type ExpenseAugment = Expense & { transaction: TransactionAugment } & {
+    products: Product[] | null;
+    sub_contracts: SubContract | null;
+};
+
+export type ProjectAugment = Project & {
+    client: Client & {
+        client_payments: (ClientPayment & {
+            transaction: TransactionAugment;
+        })[];
+    };
+    sub_contracts: (SubContract & {
+        contractor: Contractor;
+    })[];
+    expenses: ExpenseAugment[];
 };

@@ -44,9 +44,10 @@ class ProjectController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Project $project)
     {
-        //
+        $project->load(['client.client_payments.transaction.account', 'sub_contracts.contractors', 'expenses.products,transaction.account,sub_contract']);
+        return inertia('Projects/ShowProject', ['project' => $project]);
     }
 
     /**
