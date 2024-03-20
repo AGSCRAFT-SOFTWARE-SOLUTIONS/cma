@@ -1,10 +1,4 @@
-import {
-    Account,
-    Client,
-    ClientPayment,
-    ClientPaymentAugment,
-    Project,
-} from "@/types";
+import { Account, Client, ClientPaymentAugment, Project } from "@/types";
 import { useForm, usePage } from "@inertiajs/react";
 import {
     Autocomplete,
@@ -24,7 +18,7 @@ import CreateUpdateClient from "../Clients/CreateUpdateClient";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 import CreateUpdateProject from "../Projects/CreateUpdateProject";
-import CreateUpdateAccount from "./CreateUpdateAccount";
+import CreateUpdateAccount from "../Accounts/CreateUpdateAccount";
 
 type Props = PropsWithChildren<
     | {

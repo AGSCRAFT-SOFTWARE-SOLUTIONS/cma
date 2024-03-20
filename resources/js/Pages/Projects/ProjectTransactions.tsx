@@ -8,7 +8,7 @@ import {
     TableHeader,
     TableRow,
 } from "@nextui-org/react";
-import AddClientPayment from "../Accounts/AddClientPayment";
+import AddClientPayment from "../Transactions/AddClientPayment";
 
 export default ({ project }: { project: ProjectAugment }) => {
     return (
