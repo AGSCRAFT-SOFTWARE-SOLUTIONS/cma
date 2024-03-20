@@ -11,12 +11,14 @@ class Transaction extends Model
     use HasFactory, HasUuids;
 
     protected $fillable = [
-        "account_id",
-        "amount",
-        "pre_balance",
-        "post_balance",
-        "payment_method",
-        "note",
+        'account_id',
+        'amount',
+        'pre_balance',
+        'post_balance',
+        'payment_method',
+        'note',
+        'created_at',
+        'updated_at',
     ];
 
     public function account()
