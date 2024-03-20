@@ -12,6 +12,8 @@ export type PageProps<
         user: User;
     };
     clients: Client[];
+    projects: Project[];
+    accoutns: Account[];
 };
 
 export type Account = {
@@ -19,18 +21,6 @@ export type Account = {
     name: string;
     balance: number;
     type: "bank" | "advance";
-};
-
-export type Transaction = {
-    id: string;
-    account_id: string;
-    amount: number;
-    pre_balance: number;
-    post_balance: number;
-    payment_method: string;
-    note: string;
-    created_at: string;
-    updated_at: string;
 };
 
 export type Client = {
@@ -59,6 +49,10 @@ export type ClientPayment = {
     transaction_id: string;
 };
 
+export type ClientPaymentAugment = ClientPayment & {
+    transaction: TransactionAugment;
+};
+
 export type Contractor = {
     id: string;
     name: string;
@@ -73,6 +67,20 @@ export type SubContract = {
     start_date: string;
     completion_date: string;
 };
+
+export type Transaction = {
+    id: string;
+    account_id: string;
+    amount: number;
+    pre_balance: number;
+    post_balance: number;
+    payment_method: string;
+    note: string;
+    created_at: string;
+    updated_at: string;
+};
+
+export type TransactionAugment = Transaction & { account: Account };
 
 export type Expense = {
     id: string;
@@ -89,7 +97,6 @@ export type Product = {
     expense_id: string;
 };
 
-export type TransactionAugment = Transaction & { account: Account };
 export type ExpenseAugment = Expense & { transaction: TransactionAugment } & {
     products: Product[] | null;
     sub_contracts: SubContract | null;
@@ -97,9 +104,7 @@ export type ExpenseAugment = Expense & { transaction: TransactionAugment } & {
 
 export type ProjectAugment = Project & {
     client: Client & {
-        client_payments: (ClientPayment & {
-            transaction: TransactionAugment;
-        })[];
+        client_payments: ClientPaymentAugment[];
     };
     sub_contracts: (SubContract & {
         contractor: Contractor;

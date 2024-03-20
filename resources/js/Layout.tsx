@@ -9,6 +9,7 @@ import {
     faBriefcase,
     faBuilding,
     faCirclePlus,
+    faMoneyBillTransfer,
     faUser,
     faUserGroup,
     faWallet,
@@ -53,8 +54,24 @@ export default ({ children }: PropsWithChildren) => {
                                     <Link href={route("accounts.index")} />
                                 }
                             >
-                                Show all clients
+                                Show all accounts
                             </MenuItem>
+                            <SubMenu
+                                label="Transactions"
+                                icon={
+                                    <FontAwesomeIcon
+                                        icon={faMoneyBillTransfer}
+                                    />
+                                }
+                            >
+                                <MenuItem
+                                    icon={
+                                        <FontAwesomeIcon icon={faCirclePlus} />
+                                    }
+                                >
+                                    Add transaction
+                                </MenuItem>
+                            </SubMenu>
                         </SubMenu>
                         <SubMenu
                             label="Projects"
@@ -101,7 +118,7 @@ export default ({ children }: PropsWithChildren) => {
                                     <Link href={route("clients.index")} />
                                 }
                             >
-                                Show all accounts
+                                Show all clients
                             </MenuItem>
                         </SubMenu>
                     </Menu>

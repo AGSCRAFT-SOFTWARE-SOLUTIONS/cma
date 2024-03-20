@@ -2,7 +2,9 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\Account;
 use App\Models\Client;
+use App\Models\Project;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -36,6 +38,8 @@ class HandleInertiaRequests extends Middleware
                 'user' => $request->user(),
             ],
             'clients' => Client::all(),
+            'projects' => Project::all(),
+            'accounts' => Account::all()
         ];
     }
 }

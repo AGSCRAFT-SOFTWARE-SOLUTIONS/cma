@@ -1,5 +1,6 @@
 import { ProjectAugment } from "@/types";
 import {
+    Button,
     Table,
     TableBody,
     TableCell,
@@ -7,12 +8,20 @@ import {
     TableHeader,
     TableRow,
 } from "@nextui-org/react";
+import AddClientPayment from "../Accounts/AddClientPayment";
 
 export default ({ project }: { project: ProjectAugment }) => {
     return (
         <div className="grid gap-8">
             <div className="grid gap-2">
-                <h3 className="font-bold text-2xl">Client Payments</h3>
+                <div className="flex justify-between">
+                    <h3 className="font-bold text-2xl">Client Payments</h3>
+                    <AddClientPayment type="create">
+                        <Button color="primary" variant="shadow">
+                            Add client payment
+                        </Button>
+                    </AddClientPayment>
+                </div>
                 <Table>
                     <TableHeader>
                         <TableColumn>Sno</TableColumn>

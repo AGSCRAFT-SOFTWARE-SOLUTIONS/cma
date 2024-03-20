@@ -4,6 +4,7 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\TransactionController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -47,6 +48,7 @@ Route::middleware('auth')->group(
         Route::resource('/accounts', AccountController::class)->names('accounts');
         Route::resource('/projects', ProjectController::class)->names('projects');
         Route::resource('/clients', ClientController::class)->names('clients');
+        Route::resource('/transactions', TransactionController::class)->names('transactions');
     }
 );
 
