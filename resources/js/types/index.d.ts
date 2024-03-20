@@ -26,20 +26,8 @@ export type Account = {
 export type Client = {
     id: string;
     name: string;
-    phone: string;
     address: string;
-};
-
-export type Project = {
-    id: string;
-    name: string;
-    location: string;
-    category: string;
-    client_id: string;
-    budget: number;
-    start_date: string;
-    completion_date: string;
-    description: string;
+    phone: string;
 };
 
 export type ClientPayment = {
@@ -59,34 +47,23 @@ export type Contractor = {
     phone: string;
 };
 
-export type SubContract = {
-    id: string;
-    contractor_id: string;
-    project_id: string;
-    work: string;
-    start_date: string;
-    completion_date: string;
-};
-
-export type Transaction = {
-    id: string;
-    account_id: string;
-    amount: number;
-    pre_balance: number;
-    post_balance: number;
-    payment_method: string;
-    note: string;
-    created_at: string;
-    updated_at: string;
-};
-
-export type TransactionAugment = Transaction & { account: Account };
-
 export type Expense = {
     id: string;
-    transaction_id: string;
     project_id: string;
     sub_contract_id: string | null;
+    transaction_id: string;
+};
+
+export type Project = {
+    id: string;
+    name: string;
+    client_id: string;
+    category: string;
+    location: string;
+    budget: number;
+    start_date: string;
+    completion_date: string;
+    description: string;
 };
 
 export type Product = {
@@ -96,6 +73,34 @@ export type Product = {
     type: "business" | "others";
     expense_id: string;
 };
+
+export type Purchase = {
+    id: string;
+    products: Product[];
+    expense_id: string;
+};
+
+export type SubContract = {
+    id: string;
+    project_id: string;
+    work: string;
+    contractor_id: string;
+    start_date: string;
+    completion_date: string;
+};
+
+export type Transaction = {
+    id: string;
+    account_id: string;
+    amount: number;
+    created_at: string;
+    payment_method: string;
+    post_balance: number;
+    pre_balance: number;
+    note: string;
+};
+
+export type TransactionAugment = Transaction & { account: Account };
 
 export type ExpenseAugment = Expense & { transaction: TransactionAugment } & {
     products: Product[] | null;
