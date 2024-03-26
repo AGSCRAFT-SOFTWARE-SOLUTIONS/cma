@@ -35,6 +35,14 @@ type Props = PropsWithChildren<
       }
 >;
 
+const payment_methods = [
+    "UPI",
+    "Card",
+    "Net banking",
+    "Bank Transfer",
+    "Cheque",
+];
+
 export default ({
     children,
     client_id,
@@ -204,15 +212,11 @@ export default ({
                             }
                             defaultSelectedKey={data?.project_id}
                         >
-                            <AutocompleteItem key={"cash"} value={"cash"}>
-                                Cash
-                            </AutocompleteItem>
-                            <AutocompleteItem key={"upi"} value={"upi"}>
-                                UPI
-                            </AutocompleteItem>
-                            <AutocompleteItem key={"card"} value={"card"}>
-                                Card
-                            </AutocompleteItem>
+                            {payment_methods.map((method) => (
+                                <AutocompleteItem key={method} value={method}>
+                                    {method}
+                                </AutocompleteItem>
+                            ))}
                         </Autocomplete>
                         <Textarea
                             label="Note"
