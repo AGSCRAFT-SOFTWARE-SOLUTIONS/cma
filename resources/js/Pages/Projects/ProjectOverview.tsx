@@ -31,7 +31,7 @@ export default ({ project }: Props) => {
         totalSubcontractPayment +
         totalOtherExpensePayments;
     const actualProfit = totalClientPayments - totalExpenses;
-    const balanceToReceiveFromClient = totalClientPayments - actualProfit;
+    const balanceToReceiveFromClient = project.budget - totalClientPayments;
 
     return (
         <div className="grid gap-4">
