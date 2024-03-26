@@ -15,7 +15,6 @@ import ProjectTransactions from "./ProjectTransactions";
 
 export default ({ project }: { project: ProjectAugment }) => {
     console.log(project);
-
     return (
         <section className="grid gap-4">
             <Head title={project.name} />

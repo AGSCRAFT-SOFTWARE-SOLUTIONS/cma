@@ -1,41 +1,37 @@
-import { ExpenseAugment, ProjectAugment } from "@/types";
+import { ProjectAugment } from "@/types";
 import { Card, CardBody, CardHeader } from "@nextui-org/react";
-const calculateTotal = (
-    items: ExpenseAugment[],
-    condition: (item: ExpenseAugment) => boolean,
-) =>
-    items.reduce(
-        (total, item) =>
-            condition(item) ? total + item.transaction.amount : total,
-        0,
-    );
-export default ({ project }: { project: ProjectAugment }) => {
+
+interface Props {
+    project: ProjectAugment;
+}
+
+export default ({ project }: Props) => {
     const totalClientPayments = project.client.client_payments.reduce(
         (total, payment) => total + payment.transaction.amount,
         0,
     );
-    const totalExpenses = project.expenses.reduce(
-        (total, expense) => total + expense.transaction.amount,
-        0,
-    );
-    const totalPurchasePayment = calculateTotal(
-        project.expenses,
-        (expense: ExpenseAugment) =>
-            !expense.sub_contract_id &&
-            expense.products?.[0]?.type === "business",
-    );
-    const totalSubcontractPayment = calculateTotal(
-        project.expenses,
-        (expense: ExpenseAugment) => !!expense.sub_contract_id,
-    );
-    const totalOtherExpensePayments = calculateTotal(
-        project.expenses,
-        (expense: ExpenseAugment) =>
-            !expense.sub_contract_id &&
-            expense.products?.[0]?.type === "others",
-    );
-    const actualProfit = project.budget - totalExpenses;
-    const balanceToReceiveFromClient = project.budget - totalClientPayments;
+    const totalPurchasePayment =
+        project.purchases?.reduce(
+            (total, purchase) => total + purchase.expense.transaction.amount,
+            0,
+        ) || 0;
+    const totalSubcontractPayment =
+        project.sub_contracts?.reduce((total, subcontract) => {
+            return (
+                total +
+                subcontract.expense.reduce(
+                    (total, expense) => total + expense.transaction.amount,
+                    0,
+                )
+            );
+        }, 0) || 0;
+    const totalOtherExpensePayments = 0;
+    const totalExpenses =
+        totalPurchasePayment +
+        totalSubcontractPayment +
+        totalOtherExpensePayments;
+    const actualProfit = totalClientPayments - totalExpenses;
+    const balanceToReceiveFromClient = totalClientPayments - actualProfit;
 
     return (
         <div className="grid gap-4">
@@ -48,6 +44,7 @@ export default ({ project }: { project: ProjectAugment }) => {
                         {project.budget}
                     </CardBody>
                 </Card>
+
                 <Card shadow="sm">
                     <CardHeader className="text-default-500">
                         Received from client
@@ -56,6 +53,7 @@ export default ({ project }: { project: ProjectAugment }) => {
                         {totalClientPayments}
                     </CardBody>
                 </Card>
+
                 <Card shadow="sm">
                     <CardHeader className="text-default-500">
                         Total expense payments
@@ -65,6 +63,7 @@ export default ({ project }: { project: ProjectAugment }) => {
                     </CardBody>
                 </Card>
             </div>
+
             <div className="grid grid-cols-4 gap-4">
                 <Card shadow="sm">
                     <CardHeader className="text-default-500">
@@ -74,6 +73,7 @@ export default ({ project }: { project: ProjectAugment }) => {
                         {totalPurchasePayment}
                     </CardBody>
                 </Card>
+
                 <Card shadow="sm">
                     <CardHeader className="text-default-500">
                         Total subcontract payment
@@ -82,12 +82,14 @@ export default ({ project }: { project: ProjectAugment }) => {
                         {totalSubcontractPayment}
                     </CardBody>
                 </Card>
+
                 <Card shadow="sm">
                     <CardHeader className="text-default-500">
                         Total labour wages
                     </CardHeader>
                     <CardBody className="font-bold text-3xl">0</CardBody>
                 </Card>
+
                 <Card shadow="sm">
                     <CardHeader className="text-default-500">
                         Total other expense payments
@@ -97,19 +99,29 @@ export default ({ project }: { project: ProjectAugment }) => {
                     </CardBody>
                 </Card>
             </div>
+
             <div className="grid grid-cols-2 gap-4">
                 <Card
                     shadow="sm"
-                    className="bg-success-500 text-success-foreground"
+                    className={
+                        " text-danger-foreground " +
+                        (actualProfit > 0 ? "bg-success-500" : "bg-danger-500")
+                    }
                 >
                     <CardHeader>Actual Profit</CardHeader>
                     <CardBody className="font-bold text-3xl">
                         {actualProfit}
                     </CardBody>
                 </Card>
+
                 <Card
                     shadow="sm"
-                    className="bg-danger-500 text-danger-foreground"
+                    className={
+                        "text-danger-foreground " +
+                        (balanceToReceiveFromClient > 0
+                            ? "bg-danger-500"
+                            : "bg-success-500")
+                    }
                 >
                     <CardHeader>Balance to receive from client</CardHeader>
                     <CardBody className="font-bold text-3xl">

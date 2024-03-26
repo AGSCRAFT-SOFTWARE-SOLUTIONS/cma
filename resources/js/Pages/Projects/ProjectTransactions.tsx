@@ -9,6 +9,7 @@ import {
     TableRow,
 } from "@nextui-org/react";
 import AddClientPayment from "../Transactions/AddClientPayment";
+import CreateUpdatePurchase from "../Transactions/CreateUpdatePurchase";
 
 export default ({ project }: { project: ProjectAugment }) => {
     return (
@@ -32,8 +33,8 @@ export default ({ project }: { project: ProjectAugment }) => {
                     <TableBody>
                         {project.client.client_payments.map(
                             (payment, index) => (
-                                <TableRow>
-                                    <TableCell>{index}</TableCell>
+                                <TableRow key={index}>
+                                    <TableCell>{index + 1}</TableCell>
                                     <TableCell>{project.client.name}</TableCell>
                                     <TableCell>
                                         {payment.transaction.created_at}
@@ -48,7 +49,14 @@ export default ({ project }: { project: ProjectAugment }) => {
                 </Table>
             </div>
             <div className="grid gap-2">
-                <h3 className="font-bold text-2xl">Expenses</h3>
+                <div className="flex justify-between">
+                    <h3 className="font-bold text-2xl">Purchases</h3>
+                    <CreateUpdatePurchase type="create">
+                        <Button color="primary" variant="shadow">
+                            Add purchase
+                        </Button>
+                    </CreateUpdatePurchase>
+                </div>
                 <Table>
                     <TableHeader>
                         <TableColumn>Sno</TableColumn>
@@ -57,19 +65,17 @@ export default ({ project }: { project: ProjectAugment }) => {
                         <TableColumn>Amount</TableColumn>
                     </TableHeader>
                     <TableBody>
-                        {project.expenses.map((expense, index) => (
-                            <TableRow>
+                        {(project.purchases || []).map((purchase, index) => (
+                            <TableRow key={index}>
                                 <TableCell>{index}</TableCell>
                                 <TableCell>
-                                    {expense.sub_contract_id
-                                        ? "Sub contract"
-                                        : expense.products?.[0].type}
+                                    {purchase.products?.[0].type}
                                 </TableCell>
                                 <TableCell>
-                                    {expense.transaction.created_at}
+                                    {purchase.expense.transaction.created_at}
                                 </TableCell>
                                 <TableCell>
-                                    {expense.transaction.amount}
+                                    {purchase.expense.transaction.amount}
                                 </TableCell>
                             </TableRow>
                         ))}

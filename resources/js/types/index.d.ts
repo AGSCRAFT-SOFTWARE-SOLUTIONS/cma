@@ -13,7 +13,7 @@ export type PageProps<
     };
     clients: Client[];
     projects: Project[];
-    accoutns: Account[];
+    accounts: Account[];
 };
 
 export type Account = {
@@ -69,9 +69,15 @@ export type Project = {
 export type Product = {
     id: string;
     name: string;
-    cost: number;
+    hsn_sac: string;
+    unit: number;
+    uom: string;
+    unit_price: number;
+    c_gst: number;
+    s_gst: number;
+    total: number;
     type: "business" | "others";
-    expense_id: string;
+    purchase_id: string;
 };
 
 export type Purchase = {
@@ -80,6 +86,8 @@ export type Purchase = {
     expense_id: string;
 };
 
+export type PurchaseAugment = Purchase & { expense: ExpenseAugment };
+
 export type SubContract = {
     id: string;
     project_id: string;
@@ -87,6 +95,11 @@ export type SubContract = {
     contractor_id: string;
     start_date: string;
     completion_date: string;
+};
+
+export type SubContractAugment = SubContract & {
+    contractor: Contractor;
+    expense: ExpenseAugment[];
 };
 
 export type Transaction = {
@@ -102,17 +115,12 @@ export type Transaction = {
 
 export type TransactionAugment = Transaction & { account: Account };
 
-export type ExpenseAugment = Expense & { transaction: TransactionAugment } & {
-    products: Product[] | null;
-    sub_contracts: SubContract | null;
-};
+export type ExpenseAugment = Expense & { transaction: TransactionAugment };
 
 export type ProjectAugment = Project & {
     client: Client & {
         client_payments: ClientPaymentAugment[];
     };
-    sub_contracts: (SubContract & {
-        contractor: Contractor;
-    })[];
-    expenses: ExpenseAugment[];
+    sub_contracts?: SubContractAugment[];
+    purchases?: PurchaseAugment[];
 };
