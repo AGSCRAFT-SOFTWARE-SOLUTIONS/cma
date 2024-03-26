@@ -30,7 +30,7 @@ export default ({ project }: Props) => {
         totalPurchasePayment +
         totalSubcontractPayment +
         totalOtherExpensePayments;
-    const actualProfit = totalClientPayments - totalExpenses;
+    const actualProfit = project.budget - totalExpenses;
     const balanceToReceiveFromClient = project.budget - totalClientPayments;
 
     return (
