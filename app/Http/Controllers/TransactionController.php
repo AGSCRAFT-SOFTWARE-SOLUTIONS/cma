@@ -92,6 +92,9 @@ class TransactionController extends Controller
             default:
                 break;
         }
+        if ($request->expectsJson()) {
+            return response()->json($purchase);
+        }
     }
 
     /**

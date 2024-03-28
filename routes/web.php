@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\DayLogController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\TransactionController;
@@ -49,6 +50,7 @@ Route::middleware('auth')->group(
         Route::resource('/projects', ProjectController::class)->names('projects');
         Route::resource('/clients', ClientController::class)->names('clients');
         Route::resource('/transactions', TransactionController::class)->names('transactions');
+        Route::resource('/daylogs', DayLogController::class)->names('daylogs');
     }
 );
 

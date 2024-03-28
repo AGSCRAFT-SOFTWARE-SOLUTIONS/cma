@@ -12,6 +12,7 @@ import { Avatar, Tab, Tabs } from "@nextui-org/react";
 import ProjectInfo from "./ProjectInfo";
 import ProjectOverview from "./ProjectOverview";
 import ProjectTransactions from "./ProjectTransactions";
+import ProjectDayLogs from "./ProjectDayLogs";
 
 export default ({ project }: { project: ProjectAugment }) => {
     console.log(project);
@@ -34,7 +35,7 @@ export default ({ project }: { project: ProjectAugment }) => {
             <Tabs
                 color="primary"
                 variant="solid"
-                defaultSelectedKey={"transactions"}
+                defaultSelectedKey={"day_logs"}
             >
                 <Tab
                     key="overview"
@@ -78,7 +79,7 @@ export default ({ project }: { project: ProjectAugment }) => {
                         </div>
                     }
                 >
-                    Day logs
+                    <ProjectDayLogs project={project} />
                 </Tab>
             </Tabs>
         </section>

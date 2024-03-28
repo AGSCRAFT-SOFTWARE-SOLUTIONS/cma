@@ -47,12 +47,27 @@ export type Contractor = {
     phone: string;
 };
 
+export type DayLog = {
+    id: string;
+    project_id: string;
+    date: string;
+    work: string;
+    workers_count: number;
+    in: string;
+    out: string;
+    note: string;
+    images: { path: string }[] | (File & { preview: string })[];
+    purchase: PurchaseAugment;
+};
+
 export type Expense = {
     id: string;
     project_id: string;
     sub_contract_id: string | null;
     transaction_id: string;
 };
+
+export type ExpenseAugment = Expense & { transaction: TransactionAugment };
 
 export type Project = {
     id: string;
@@ -64,6 +79,15 @@ export type Project = {
     start_date: string;
     completion_date: string;
     description: string;
+};
+
+export type ProjectAugment = Project & {
+    client: Client & {
+        client_payments: ClientPaymentAugment[];
+    };
+    sub_contracts?: SubContractAugment[];
+    purchases?: PurchaseAugment[];
+    day_logs?: DayLog[];
 };
 
 export type Product = {
@@ -114,13 +138,3 @@ export type Transaction = {
 };
 
 export type TransactionAugment = Transaction & { account: Account };
-
-export type ExpenseAugment = Expense & { transaction: TransactionAugment };
-
-export type ProjectAugment = Project & {
-    client: Client & {
-        client_payments: ClientPaymentAugment[];
-    };
-    sub_contracts?: SubContractAugment[];
-    purchases?: PurchaseAugment[];
-};

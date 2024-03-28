@@ -46,7 +46,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        $project->load(['client.client_payments.transaction.account', 'sub_contracts.contractors',  'purchases.expense.transaction', 'purchases.products']);
+        $project->load(['client.client_payments.transaction.account', 'sub_contracts.contractors', 'purchases.expense.transaction', 'purchases.products', 'day_logs.purchase']);
         return inertia('Projects/ShowProject', ['project' => $project]);
     }
 
